@@ -1,0 +1,95 @@
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="6footGeek">
+    <title>Meteor-network | #network #startup #social #innovation</title>
+</head>
+
+<body>
+    <div class="brand">Meteor-network</div>
+    <div class="address-bar">#network #startup #social #innovation</div>
+    <div class="container">
+        <div class="well well-sm">
+            <div class=".col-md-6">
+                {{> counter}}
+                <p class="text-center">This meteor app allows users to sign up and share networking info!</p>
+                <p class="text-center">Submit your details and network!</p>
+            </div>
+            {{#if currentUser}} {{> addStartup}} {{/if}}
+        </div>
+        <div class="brand">Attendees info</div>
+        <div class="col-md-6">
+            {{> list}}
+        </div>
+    </div>
+    <footer>
+        <div class="col-md-6">
+            <p class=" text-center"><a href="http://andybarlow.me" title="6footGeek Software Development">6footGeek</a> 2015
+                <br><a target="_blank" href="https://www.facebook.com/6footGeek"><span class="fa fa-facebook "></span>
+                    </a><span class="separator">|</span><a target="_blank" href="http://twitter.com/@6footgeek"><span class="fa fa-twitter"></span></a><span class="separator">|</span> <a target="_blank" href="http://instagram.com/6footgeek"><span class="fa fa-instagram"></span></a>
+            </p>
+        </div>
+    </footer>
+</body>
+<template name="list">
+    {{#each startups}} {{> startup}} {{/each}}
+</template>
+<template name="startup">
+    <div class="well well-sm">
+        <div class="col-xs-9 col-md-9 section-box">
+            {{#if isOwner}}
+            <button class="delete">&times;</button> {{/if}}
+            <h2 class="text-right">{{name}}</h2>
+            <p><a href="{{website}}" target="_blank">{{website}}</a></p>
+            <p>
+                {{info}}
+            </p>
+            <hr />
+            <div class="social">
+                <div class="col-md-12">
+                    {{#if hasFacebook}} <a target="_blank" href="{{facebook}}"><span class="fa fa-facebook "></span>
+                    </a><span class="separator">|</span>{{/if}} {{#if hasTwitter}} <a target="_blank" href="{{twitter}}"><span class="fa fa-twitter"></span></a><span class="separator">|</span> {{/if}} {{#if hasInstagram}}<a target="_blank" href="{{instagram}}"><span class="fa fa-instagram"></span></a>{{/if}} {{#if hasEmail}}<span class="separator">|</span> <a href="mailto:{{email}}"><span class="fa fa-envelope-o"></span>
+                    </a>{{/if}}
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+<template name="form">
+    <form id="form" class="text-center">
+        <label>Business name</label>
+        <div class="input-prepend"><span class="add-on"><i class="icon-user"></i></span>
+            <input type="text" id="name" name="name" placeholder="Startup name!">
+        </div>
+        <label>website</label>
+        <div class="input-prepend"><span class="add-on"><i class="icon-globe"></i></span>
+            <input type="url" id="website" name="website" placeholder="http://website.com" data-toggle="tooltip" data-placement="right" title="Tooltip on right">
+        </div>
+        <label>facebook</label>
+        <div class="input-append">
+            <input type="url" id="facebook" placeholder="http://facebook.com/yourstartup" name="facebook"><span class="add-on"><i class="fa fa-facebook"></i></span></div>
+        <label>twitter</label>
+        <div class="input-append">
+            <input type="url" id="twitter" name="twitter" placeholder="http://twitter.com/@yourname"><span class="add-on"><i class="fa fa-twitter"></i></span></div>
+        <label>instagram</label>
+        <div class="input-append">
+            <input type="url" id="instagram" name="instagram" placeholder="http://instagram.com/yourname"><span class="add-on"><i class="fa fa-instagram"></i></span></div>
+        <label>email</label>
+        <div class="input-prepend"><span class="add-on"><i class="icon-envelope"></i></span>
+            <input type="email" id="email" name="email" placeholder="you@yourstartup.com">
+        </div>
+        <label>info</label>
+        <div class="input-prepend"><span class="add-on"><i class="fa fa-info-circle"></i></span>
+            <textarea class="form-control" placeholder="A little blurb about you!" id="info" name="info" rows="3" data-toggle="tooltip" data-placement="right" title="Tooltip on right"></textarea>
+        </div>
+        <div>
+            <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+        </div>
+    </form>
+</template>
+<template name="counter">
+    <p class="text-right"><strong>{{count}}</strong> startups so far! {{> loginButtons}}</p>
+</template>
+<template name="addStartup">
+    {{> form}}
+</template>
